@@ -3,9 +3,15 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+export const UserContext = React.createContext()
+
+const username = "Sergi"
+
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <UserContext.Provider value={username}>
+      <App />
+    </UserContext.Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
