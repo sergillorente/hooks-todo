@@ -7,7 +7,6 @@ import TodosContext from './context'
 import todosReducer from './reducer'
 import TodoList from './components/TodoList'
 import TodoForm from './components/TodoForm'
-import axios from 'axios';
 
 const useAPI = endpoint => {
   const [data, setData] = useState([])
