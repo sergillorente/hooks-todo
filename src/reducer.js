@@ -13,8 +13,10 @@ export default function reducer(state, action) {
             }
         case 'REMOVE_TODO':
             const filteredTodos = state.todos.filter(t => t.id !== action.payload.id)
+            const isRemovedTodo = state.currentTodo.id === action.payload.id ? {} : state.currentTodo
             return {
                 ...state, 
+                currentTodo: isRemovedTodo,
                 todos: filteredTodos
             }
         case 'ADD_TODO':
@@ -32,6 +34,23 @@ export default function reducer(state, action) {
             return {
                 ...state,
                 currentTodo: action.payload
+            }
+        case 'UPDATE_TODO':
+            const updatedTodo = {
+                ...state.currentTodo, text: action.payload
+            }
+            const updatedTodoIndex = state.todos.findIndex(
+                t => t.id === state.currentTodo.id
+            )
+            const updatedTodos = [
+                ...state.todos.slice(0, updatedTodoIndex), 
+                updatedTodo,
+                ...state.todos.slice(updatedTodoIndex + 1)
+            ]
+            return {
+                ...state,
+                currentTodo: {},
+                todos: updatedTodos
             }
         default:
             return state
